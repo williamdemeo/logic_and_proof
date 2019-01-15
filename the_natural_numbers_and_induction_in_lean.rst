@@ -255,58 +255,56 @@ Exercises
 
 #. Formalize as many of the identities from :numref:`defining_arithmetic_operations` as you can by replacing each `sorry` with a proof.
 
-.. code-block:: lean
-  --1.a.
-  example : ∀ m n k : nat, m * (n + k) = m * n + m * k := sorry
+   .. code-block:: lean
 
-  --1.b.
-  example : ∀ n : nat, 0 * n = 0 := sorry
+       --1.a.
+       example : ∀ m n k : nat, m * (n + k) = m * n + m * k := sorry
 
-  --1.c.
-  example : ∀ n : nat, 1 * n = n := sorry
+       --1.b.
+       example : ∀ n : nat, 0 * n = 0 := sorry
 
-  --1.d.
-  example : ∀ m n k : nat, (m * n) * k = m * (n * k) := sorry
+       --1.c.
+       example : ∀ n : nat, 1 * n = n := sorry
 
-  --1.e.
-  example : ∀ m n : nat, m * n= n * m := sorry
+       --1.d.
+       example : ∀ m n k : nat, (m * n) * k = m * (n * k) := sorry
 
+       --1.e.
+       example : ∀ m n : nat, m * n= n * m := sorry
 
 #. Formalize as many of the identities from :numref:`arithmetic_on_the_natural_numbers` as you can by replacing each `sorry` with a proof.
 
-.. code-block:: lean
-  --2.a.
-  example : ∀ m n k : nat, n ≤ m → n + k ≤ m  + k := sorry
+   .. code-block:: lean
 
-  --2.b. For this exercise, the following lemma is useful.
+      --2.a.
+      example : ∀ m n k : nat, n ≤ m → n + k ≤ m  + k := sorry
 
-  lemma succ_le_le : ∀ m n : nat, succ m ≤ succ n → m ≤ n :=
-  assume m n,
-  nat.rec_on m
-  -- base step
-  ( show succ 0 ≤ succ n → 0 ≤ n, from 
-    assume h : succ 0 ≤ succ n, zero_le n )
-  -- induction step
-  ( assume m,
-    assume ih : succ m ≤ succ n → m ≤ n, 
-    show succ (succ m) ≤ succ n → succ m ≤ n, from 
-    assume h₁ : succ (succ m) ≤ succ n, 
-    have h₂ : succ m < succ n, from lt_of_succ_le h₁,
-    show succ m ≤ n, from le_of_lt_succ h₂ )
-
-
-  example : ∀ m n k : nat, n + k ≤ m + k → n ≤ m := sorry
+      -- 2.b. For this exercise, the following lemma is useful.
+ 
+              lemma succ_le_le : ∀ m n : nat, succ m ≤ succ n → m ≤ n :=
+              assume m n,
+              nat.rec_on m
+              -- base step
+              ( show succ 0 ≤ succ n → 0 ≤ n, from 
+                assume h : succ 0 ≤ succ n, zero_le n )
+              -- induction step
+              ( assume m,
+                assume ih : succ m ≤ succ n → m ≤ n, 
+                show succ (succ m) ≤ succ n → succ m ≤ n, from 
+                assume h₁ : succ (succ m) ≤ succ n, 
+                have h₂ : succ m < succ n, from lt_of_succ_le h₁,
+                show succ m ≤ n, from le_of_lt_succ h₂ )
 
 
+              example : ∀ m n k : nat, n + k ≤ m + k → n ≤ m := sorry
 
+      --2.c.
+      example : ∀ m n k : nat, n ≤ m → n * k ≤ m * k := sorry
 
-  --2.c.
-  example : ∀ m n k : nat, n ≤ m → n * k ≤ m * k := sorry
+      --2.d.
+      example : ∀ m n : nat, m ≥ n → m = n ∨ m ≥ n+1 := sorry
 
-  --2.d.
-  example : ∀ m n : nat, m ≥ n → m = n ∨ m ≥ n+1 := sorry
-
-  --2.e.
-  example : ∀ n : nat, 0 ≤ n := sorry
+      --2.e.
+      example : ∀ n : nat, 0 ≤ n := sorry
 
 
