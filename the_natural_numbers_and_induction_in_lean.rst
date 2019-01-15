@@ -278,8 +278,27 @@ Exercises
   --2.a.
   example : ∀ m n k : nat, n ≤ m → n + k ≤ m  + k := sorry
 
-  --2.b.
+  --2.b. For this exercise, the following lemma is useful.
+
+  lemma succ_le_le : ∀ m n : nat, succ m ≤ succ n → m ≤ n :=
+  assume m n,
+  nat.rec_on m
+  -- base step
+  ( show succ 0 ≤ succ n → 0 ≤ n, from 
+    assume h : succ 0 ≤ succ n, zero_le n )
+  -- induction step
+  ( assume m,
+    assume ih : succ m ≤ succ n → m ≤ n, 
+    show succ (succ m) ≤ succ n → succ m ≤ n, from 
+    assume h₁ : succ (succ m) ≤ succ n, 
+    have h₂ : succ m < succ n, from lt_of_succ_le h₁,
+    show succ m ≤ n, from le_of_lt_succ h₂ )
+
+
   example : ∀ m n k : nat, n + k ≤ m + k → n ≤ m := sorry
+
+
+
 
   --2.c.
   example : ∀ m n k : nat, n ≤ m → n * k ≤ m * k := sorry
