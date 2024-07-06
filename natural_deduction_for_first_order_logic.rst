@@ -6,96 +6,7 @@ Rules of Inference
 
 In the last chapter, we discussed the language of first-order logic, and the rules that govern their use. We summarize them here:
 
-*The universal quantifier:*
-
-.. raw:: html
-
-   <img src="_static/natural_deduction_for_first_order_logic.1.png">
-
-.. raw:: latex
-
-   \begin{quote}
-   \AXM{A(x)}
-   \RLM{\mathord{\forall}\mathrm{I}}
-   \UIM{\fa y A(y)}
-   \DP
-   \quad\quad
-   \AXM{\fa x A(x)}
-   \RLM{\mathord{\forall}\mathrm{E}}
-   \UIM{A(t)}
-   \DP
-   \end{quote}
-
-In the introduction rule, :math:`x` should not be free in any uncanceled hypothesis. In the elimination rule, :math:`t` can be any term that does not clash with any of the bound variables in :math:`A`.
-
-*The existential quantifier:*
-
-.. raw:: html
-
-   <img src="_static/natural_deduction_for_first_order_logic.2.png">
-
-.. raw:: latex
-
-   \begin{quote}
-   \AXM{A(t)}
-   \RLM{\mathord{\exists}\mathrm{I}}
-   \UIM{\exists  x A(x)}
-   \DP
-   \quad\quad
-   \AXM{\exists  x A(x)}
-   \AXM{}
-   \RLM{1}
-   \UIM{A(y)}
-   \noLine
-   \UIM{\vdots}
-   \noLine
-   \UIM{B}
-   \RLM{1 \;\; \mathord{\exists}\mathrm{E}}
-   \BIM{B}
-   \DP
-   \end{quote}
-
-In the introduction rule, :math:`t` can be any term that does not clash with any of the bound variables in :math:`A`. In the elimination rule, :math:`y` should not be free in :math:`B` or any uncanceled hypothesis.
-
-*Equality:*
-
-.. raw:: html
-
-   <img src="_static/natural_deduction_for_first_order_logic.3.png">
-
-.. raw:: latex
-
-   \begin{center}
-   \AXM{}
-   \RLM{\mathrm{refl}}
-   \UIM{t = t}
-   \DP
-   \quad
-   \AXM{s = t}
-   \RLM{\mathrm{symm}}
-   \UIM{t = s}
-   \DP
-   \quad
-   \AXM{r = s}
-   \AXM{s = t}
-   \RLM{\mathrm{trans}}
-   \BIM{r = t}
-   \DP
-   \\
-   \ \\
-   \AXM{s = t}
-   \RLM{\mathrm{subst}}
-   \UIM{r(s) = r(t)}
-   \DP
-   \quad
-   \AXM{s = t}
-   \RLM{\mathrm{subst}}
-   \AXM{P(s)}
-   \BIM{P(t)}
-   \DP
-   \end{center}
-
-Strictly speaking, only :math:`\mathrm{refl}` and the second substitution rule are necessary. The others can be derived from them.
+.. include:: inference_rules_for_first_order_logic.rst
 
 The Universal Quantifier
 ------------------------
@@ -148,7 +59,7 @@ Here is another example:
 
 As an exercise, try proving the following:
 
-.. math:: 
+.. math::
 
    \forall x \; (A(x) \to B(x)) \to (\forall x \; A(x) \to \forall x \; B(x)).
 
@@ -414,7 +325,7 @@ The second axiom on that line is similar, except now :math:`P(x)` stands for any
 
 Notice that we have written the reflexivity axiom, :math:`t = t`, as a rule with no premises. If you use it in a proof, it does not count as a hypothesis; it is built into the logic.
 
-In fact, we can think of the first inference on the second line as a special case of the first. Consider, for example, the formula :math:`((u + v) + y) \times (z + 0) = (x + y) \times (z + 0)`. If we plug :math:`u + v` in for :math:`x`, we get an instance of reflexivity. If we plug in :math:`0`, we get the conclusion of the first example above. The following is therefore a derivation of the first inference, using only reflexivity and the second substitution rule above:
+In fact, we can think of the first inference on the second line as a special case of the second one. Consider, for example, the formula :math:`((u + v) + y) \times (z + 0) = (x + y) \times (z + 0)`. If we plug :math:`u + v` in for :math:`x`, we get an instance of reflexivity. If we plug in :math:`0`, we get the conclusion of the first example above. The following is therefore a derivation of the first inference, using only reflexivity and the second substitution rule above:
 
 .. raw:: html
 
@@ -456,16 +367,21 @@ The strategy is to use the elimination rule for the universal quantifier to inst
 
    \begin{center}
    \AXM{}
-   \UIM{\mathsf{assoc}}
+   \UIM{\mathsf{assoc}\strut}
+   \UIM{(x + y) + z = x + (y + z)}
+
+   \AXM{}
+   \UIM{\mathsf{comm}\strut}
+   \UIM{y + z = z + y}
+   \UIM{x + (y + z) = x + (z + y)}
+
+   \AXM{}
+   \UIM{\mathsf{assoc}\strut}
    \UIM{(x + z) + y = x + (z + y)}
    \UIM{x + (z + y) = (x + z) + y}
-   \AXM{}
-   \UIM{\mathsf{comm}}
-   \UIM{y + z = z + y}
-   \AXM{}
-   \UIM{\mathsf{assoc}}
-   \UIM{(x + y) + z = x + (y + z)}
-   \BIM{(x + y) + z = x + (z + y)}
+
+   \BIM{x + (y + z) = (x + z) + y}
+
    \BIM{(x + y) + z = (x + z) + y}
    \UIM{\fa {x, y, z} ((x + y) + z = (x + z) + y)}
    \DP
@@ -480,7 +396,7 @@ Consider the statement:
 
     Every prime number is odd.
 
-In first-order logic, we could formulate this as :math:`\forall p \; (\mathit{prime}(p) \to \mathit{odd}(p))`. This statement is false, because there is a prime number which is even, namely the number 2. This is called a *counterexample* to the statement.
+In first-order logic, we could formulate this as :math:`\forall p \; (\mathit{prime}(p) \to \mathit{odd}(p))`. This statement is false, because there is a prime number that is even, namely the number 2. This is called a *counterexample* to the statement.
 
 More generally, given a formula :math:`\forall x \; A(x)`, a counterexample is a value :math:`t` such that :math:`\neg A(t)` holds. Such a counterexample shows that the original formula is false, because we have the following equivalence: :math:`\neg \forall x \; A(x) \leftrightarrow \exists x \; \neg A(x)`. So if we find a value :math:`t` such that :math:`\neg A(t)` holds, then by the existential introduction rule we can conclude that :math:`\exists x \; \neg A(x)`, and then by the above equivalence we have :math:`\neg \forall x \; A(x)`. Here is a proof of the equivalence:
 

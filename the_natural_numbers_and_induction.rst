@@ -1,4 +1,4 @@
-.. _the_natural_numbers_and_induction:
+﻿.. _the_natural_numbers_and_induction:
 
 The Natural Numbers and Induction
 =================================
@@ -42,7 +42,7 @@ Here is an example of a proof by induction.
 
 **Proof.** We prove this by induction on :math:`n`. In the base case, when :math:`n = 0`, we have :math:`1 = 2^{0+1} - 1`, as required.
 
-For the induction step, fix :math:`n`, and assume the *induction hypothesis*
+For the induction step, fix :math:`n`, and assume the *inductive hypothesis*
 
 .. math::
 
@@ -520,9 +520,9 @@ As usual, then, we can define :math:`m < n` to mean that :math:`m \le n` and :ma
 
 ----
 
-**Proposition.** For every :math:`m`, :math:`m + 1 \not\le 0`. 
+**Proposition.** For every :math:`m`, :math:`m + 1 \not\le 0`.
 
-**Proof.** Otherwise, we would have :math:`(m + 1) + k = (m + k) + 1 = 0` for some :math:`k`. 
+**Proof.** Otherwise, we would have :math:`(m + 1) + k = (m + k) + 1 = 0` for some :math:`k`.
 
 ----
 
@@ -530,7 +530,7 @@ In particular, taking :math:`m = 0`, we have :math:`1 \not\le 0`.
 
 ----
 
-**Proposition.** We have :math:`m < n` iff and only if :math:`m + 1 \le n`.
+**Proposition.** We have :math:`m < n` if and only if :math:`m + 1 \le n`.
 
 **Proof.** Suppose :math:`m < n`. Then :math:`m \le n` and :math:`m \ne n`. So there is a :math:`k` such that :math:`m + k = n`, and since :math:`m \ne n`, we have :math:`k \ne 0`. Then :math:`k = u + 1` for some :math:`u`, which means we have :math:`m + (u + 1) = m + 1 + u = n`, so :math:`m \le n`, as required.
 
@@ -583,11 +583,9 @@ These can be proved from the ones above. Moreover, the collection of principles 
 
 ----
 
-**Proposition.** If :math:`n` and :math:`m` are natural numbers such that :math:`n + m = 0`, then :math:`n = m = 0`.
+**Proposition.** If :math:`m` and :math:`n` are natural numbers such that :math:`m + n = 0`, then :math:`m = n = 0`.
 
-**Proof.** We first prove that :math:`m = 0`. We know that :math:`m = 0` or :math:`m > 0`. Suppose that :math:`m > 0`. Then :math:`n + m > n + 0 = n`. Since :math:`n \ge 0`, we conclude that :math:`n + m > 0`, which contradicts the fact that :math:`n + m = 0`. Since :math:`m > 0` leads to a contradiction, we must have :math:`m = 0`.
-
-Now we can easily conclude that :math:`n = 0`, since :math:`n = n + 0 = n + m = 0`. Hence :math:`n = m = 0`.
+**Proof.** If :math:`m + n = 0`, then :math:`m \le 0`, so :math:`m = 0` and :math:`n = 0 + n = m + n = 0`.
 
 **Proposition.** If :math:`n` is a natural number such that :math:`n < 3`, then :math:`n = 0`, :math:`n = 1` or :math:`n = 2`.
 
@@ -621,9 +619,11 @@ Exercises
 
 #. Write the principle of complete induction using the notation of symbolic logic. Also write the least element principle this way, and use logical manipulations to show that the two are equivalent.
 
-#. Show that for every :math:`n`, :math:`0^2 + 1^2 + 2^2 + \ldots n^2= \frac{1}{6}n(n+1)(n+2)`.
+#. Show that for every :math:`n`, :math:`0^2 + 1^2 + 2^2 + \ldots n^2= \frac{1}{6}n(1+n)(1+2n)`.
 
 #. Show that for every :math:`n`, :math:`0^3 + 1^3 + \ldots + n^3 = \frac{1}{4} n^2 (n+1)^2`.
+
+#. Show that for every :math:`n`, :math:`\sum_{i \le n} \frac{i}{(i + 1)!} = \frac{n! - 1}{n}`.
 
 #. Given the definition of the Fibonacci numbers in :numref:`recursive_definitions`, prove Cassini's identity: for every :math:`n`, :math:`F^2_{n+1} - F_{n+2} F_n = (-1)^n`. Hint: in the induction step, write :math:`F_{n+2}^2` as :math:`F_{n+2}(F_{n+1} + F_n)`.
 
@@ -647,13 +647,13 @@ Exercises
 
 #. Give an informal but detailed proof that for every natural number :math:`n`, :math:`1 \cdot n = n`, using a proof by induction, the definition of multiplication, and the theorems proved in :numref:`defining_arithmetic_operations`.
 
-#. Show that multiplication distributes over addition. In other words, prove that for natural numbers :math:`m`, :math:`n`, and :math:`k`, :math:`m (n + k) = m n + m k`. You should use the definitions of addition and multiplication and facts proved in :numref:`defining_arithmetic_operations` (but nothing more). 
+#. Show that multiplication distributes over addition. In other words, prove that for natural numbers :math:`m`, :math:`n`, and :math:`k`, :math:`m (n + k) = m n + m k`. You should use the definitions of addition and multiplication and facts proved in :numref:`defining_arithmetic_operations` (but nothing more).
 
 #. Prove the multiplication is associative, in the same way. You can use any of the facts proved in :numref:`defining_arithmetic_operations` and the previous exercise.
 
 #. Prove that multiplication is commutative.
 
-#. Prove :math:`(m^n)^k = m^{nk}`.   
+#. Prove :math:`(m^n)^k = m^{nk}`.
 
 #. Following the example in :numref:`arithmetic_on_the_natural_numbers`, prove that if :math:`n` is a natural number and :math:`n < 5`, then :math:`n` is one of the values :math:`0, 1, 2, 3`, or :math:`4`.
 

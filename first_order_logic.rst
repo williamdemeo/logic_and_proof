@@ -13,7 +13,7 @@ Functions, Predicates, and Relations
 Consider some ordinary statements about the natural numbers:
 
 -  Every natural number is even or odd, but not both.
--  A natural number is even if and only if it is divisible by two. 
+-  A natural number is even if and only if it is divisible by two.
 -  If some natural number, :math:`x`, is even, then so is :math:`x^2`.
 -  A natural number :math:`x` is even if and only if :math:`x + 1` is odd.
 -  Any prime number that is greater than 2 is odd.
@@ -50,7 +50,7 @@ Now, using the predicates and relation symbols, we can make assertions about the
 
 -  :math:`\mathit{even}(x + y + z)`
 -  :math:`\mathit{prime}((x + 1) \times y \times y)`
--  :math:`\mathit{square} (x + y \times z) = w)`
+-  :math:`\mathit{square}(x + y \times z) = w`
 -  :math:`x + y < z`
 
 Even more interestingly, we can use propositional connectives to build compound expressions like these:
@@ -71,7 +71,7 @@ What makes first-order logic powerful is that it allows us to make general asser
 - :math:`\forall x \; (\mathit{even}(x) \to \mathit{even}(x^2))`
 - :math:`\forall x \; (\mathit{even}(x) \leftrightarrow \mathit{odd}(x+1))`
 - :math:`\forall x \; (\mathit{prime}(x) \wedge x > 2 \to \mathit{odd}(x))`
-- :math:`\forall x \; \forall y \; \forall z (x \mid y \wedge y \mid z \to x \mid z)`
+- :math:`\forall x \; \forall y \; \forall z \; (x \mid y \wedge y \mid z \to x \mid z)`
 
 It is common to combine multiple quantifiers of the same kind, and write, for example, :math:`\forall x, y, z \; (x \mid y \wedge y \mid z \to x \mid z)` in the last expression.
 
@@ -81,13 +81,13 @@ Here are some notes on syntax:
 
 - Be careful, however. In other contexts, especially in computer science, people often give quantifiers the *widest* scope possible. This is the case with Lean. For example, ``∀ x, P ∨ Q`` is interpreted as ``∀ x, (P ∨ Q)``, and we would write ``(∀ x, P) ∨ Q`` to limit the scope.
 
-- After the quantifier :math:`\forall  x`, the variable :math:`x` is *bound*. For example, the expression :math:`\forall x \; (\mathit{even}(x) \vee \mathit{odd}(x))` is expresses that every number is even or odd. Notice that the variable :math:`x` does not appear anywhere in the informal statement. The statement is not about :math:`x` at all; rather :math:`x` is a dummy variable, a placeholder that stands for the "thing" referred to within a phrase that beings with the words "every thing." We think of the expression :math:`\forall x \; (\mathit{even}(x) \vee \mathit{odd}(x))` as being the same as the expression :math:`\forall y \; (\mathit{even}(y) \vee \mathit{odd}(y))`. Lean also treats these expressions as the same.
+- When you put the quantifier :math:`\forall x` in front a formula that involves the variable :math:`x`, all the occurrences of that variable are *bound* by the quantifier. For example, the expression :math:`\forall x \; (\mathit{even}(x) \vee \mathit{odd}(x))` is expresses that every number is even or odd. Notice that the variable :math:`x` does not appear anywhere in the informal statement. The statement is not about :math:`x` at all; rather :math:`x` is a dummy variable, a placeholder that stands for the "thing" referred to within a phrase that beings with the words "every thing." We think of the expression :math:`\forall x \; (\mathit{even}(x) \vee \mathit{odd}(x))` as being the same as the expression :math:`\forall y \; (\mathit{even}(y) \vee \mathit{odd}(y))`. Lean also treats these expressions as the same.
 
 - In Lean, the expression ``∀ x y z, x ∣ y → y ∣ z → x ∣ z`` is interpreted as ``∀ x y z, x ∣ y → (y ∣ z → x ∣ z)``, with parentheses associated to the *right*. The part of the expression after the universal quantifier can therefore be interpreted as saying "given that ``x`` divides ``y`` and that ``y`` divides ``z``, ``x`` divides ``z``." The expression is logically equivalent to ``∀ x y z, x ∣ y ∧ y ∣ z → x ∣ z``, but we will see that, in Lean, it is often convenient to express facts like this as an iterated implication.
 
 A variable that is not bound is called *free*. Notice that formulas in first-order logic say things about their free variables. For example, in the interpretation we have in mind, the formula :math:`\forall y \; (x \le y)` says that :math:`x` is less than or equal to every natural number. The formula :math:`\forall z \; (x \le z)` says exactly the same thing; we can always rename a bound variable, as long as we pick a name that does not clash with another name that is already in use. On the other hand, the formula :math:`\forall y (w \le y)` says that :math:`w` is less than or equal to every natural number. This is an entirely different statement: it says something about :math:`w`, rather than :math:`x`. So renaming a *free* variable changes the meaning of a formula.
 
-Notice also that some formulas, like :math:`\forall x, y \; (x \le y \vee y \le x)`, have no free variables at all. Such a formula is called a *sentence*, because it makes an outright assertion, a statement that is either true or false about the intended interpretation. In :numref:`Chapter %s <semantics_of_first_order_logic>` we will make the notion of an "intended interpretation" precise, and explain what it means to be "true in an interpretation." For now, the idea that formulas say things about about object in an intended interpretation should motivate the rules for reasoning with such expressions.
+Notice also that some formulas, like :math:`\forall x, y \; (x \le y \vee y \le x)`, have no free variables at all. Such a formula is called a *sentence*, because it makes an outright assertion, a statement that is either true or false about the intended interpretation. In :numref:`Chapter %s <semantics_of_first_order_logic>` we will make the notion of an "intended interpretation" precise, and explain what it means to be "true in an interpretation." For now, the idea that formulas say things about an object in an intended interpretation should motivate the rules for reasoning with such expressions.
 
 In :numref:`Chapter %s <introduction>` we proved that the square root of two is irrational. One way to construe the statement is as follows:
 
@@ -97,7 +97,7 @@ The advantage of this formulation is that we can restrict our attention to the i
 
 .. math::
 
-   \forall  a, b \; b \ne 0 \to \neg (a^2 = 2 b^2). 
+   \forall  a, b \; b \ne 0 \to \neg (a^2 = 2 b^2).
 
 Notice that we have kept the conventional mathematical notation :math:`b \ne 0` to say that :math:`b` is not equal to 0, but we can think of this as an abbreviation for :math:`\neg (b = 0)`.  How do we prove such a theorem? Informally, we would use such a pattern:
 
@@ -167,7 +167,7 @@ What about the elimination rule? Suppose we know that every number is even or od
    \UIM{A(t)}
    \end{prooftree}
 
-where :math:`t` is an arbitrary term.
+where :math:`t` is an arbitrary term, subject to the restriction described at the end of the next section.
 
 In a sense, this feels like the elimination rule for implication; we might read the hypothesis as saying "if :math:`x` is any thing, then :math:`x` is even or odd." The conclusion is obtained by applying it to the fact that :math:`n` is a thing. Note that, in general, we could replace :math:`n` by any *term* in the language, like :math:`n (m + 5) +2`. Similarly, the introduction rule feels like the introduction rule for implication. If we want to show that everything has a certain property, we temporarily let :math:`x` denote an arbitrary thing, and then show that it has the relevant property.
 
@@ -222,7 +222,7 @@ This illustrates the introduction rule for the existential quantifier:
    \DP
    \end{center}
 
-where :math:`t` is any term. So to prove an existential formula, we just have to give one particular term for which we can prove that formula. Such term is called a *witness* for the formula.
+where :math:`t` is any term, subject to the restriction described below. So to prove an existential formula, we just have to give one particular term for which we can prove that formula. Such term is called a *witness* for the formula.
 
 What about the elimination rule? Suppose that we know that :math:`n` is some natural number and we know that there exists a prime :math:`p` such that :math:`p < n` and :math:`p \mid n`. How can we use this to prove that :math:`n` is composite? We can reason as follows:
 
@@ -255,9 +255,11 @@ In natural deduction, the elimination rule is expressed as follows:
    \BIM{B}
    \end{prooftree}
 
-Here we require that :math:`y` is not free in :math:`B`, and that the only uncanceled hypotheses where :math:`y` occurs freely are the hypotheses :math:`A(y)` that are canceled when you apply this rule. Formally, this is what it means to say that :math:`y` is "arbitrary." As was the case for or elimination and implication introduction, you can use the hypothesis :math:`A(y)` multiple times in the proof of :math:`B`, and cancel all of them at once.
+Here we require that :math:`y` is not free in :math:`B`, and that the only uncanceled hypotheses where :math:`y` occurs freely are the hypotheses :math:`A(y)` that are canceled when you apply this rule. Formally, this is what it means to say that :math:`y` is "arbitrary." As was the case for or elimination and implication introduction, you can use the hypothesis :math:`A(y)` multiple times in the proof of :math:`B`, and cancel all of them at once. Intuitively, the rule says that you can prove :math:`B` from the assumption :math:`\exists x A(x)` by assuming :math:`A(y)` for a fresh variable :math:`y`, and concluding, in any number of steps, that :math:`B` follows. You should compare this rule to the rule for or elimination, which is somewhat analogous.
 
-Intuitively, the rule says that you can prove :math:`B` from the assumption :math:`\exists x A(x)` by assuming :math:`A(y)` for a fresh variable :math:`y`, and concluding, in any number of steps, that :math:`B` follows. You should compare this rule to the rule for or elimination, which is somewhat analogous. In the following example, we show that if :math:`A(x)` always implies :math:`\neg B(x)`, then there cannot be an :math:`x` for which both :math:`A(x)` and :math:`B(x)` holds.
+There is a restriction on the term :math:`t` that appears in the elimination rule for the universal quantifier and the introduction rule for the existential quantifier, namely, that no variable that appears in :math:`t` becomes bound when you plug it in for :math:`x`. To see what can go wrong if you violate this restriction, consider the sentence :math:`\forall x \; \exists y \; y > x`. If we interpret this as a statement about the natural numbers, it says that for every number :math:`x`, there is a bigger number :math:`y`. This is a true statement, and so it should hold whatever we substitute for :math:`x`. But what happens if we substitute :math:`y + 1`? We get the statement :math:`\exists y \; y > y + 1`, which is false. The problem is that before the substitution the variable :math:`y` in :math:`y + 1` refers to an arbitrary number, but after the substitution, it refers to the number that is asserted to exist by the existential quantifier, and that is not what we want.
+
+Violating the restriction in the introduction rule for the existential quantifier causes similar problems. For example, it allows us to derive :math:`\exists x \; \forall y \; y = x`, which says that there is exactly one number, from the hypothesis :math:`\forall y \; y = y`. The good news is that if you rely on your intuition, you are unlikely to make mistakes like these. But it is an important fact that the rules of natural deduction can be given a precise specification that rules out these invalid inferences.
 
 .. _relativization_and_sorts:
 
@@ -402,7 +404,7 @@ Exercises
 
    By the way, we do not know whether the last two statements are true. They are open questions.
 
-#. Using a language with variables ranging over people, and predicates :math:`\mathit{trusts}(x,y)`, :math:`\mathit{politician}(x)`, :math:`\mathit{crazy(x)}`, :math:`\mathit{knows}(x, y)`, and :math:`\mathit{related\mathord{\mbox{-}}to}(x, y)`, and :math:`\mathit{rich}(x)`, write down first-order sentences asserting the following:
+#. Using a language with variables ranging over people, and predicates :math:`\mathit{trusts}(x,y)`, :math:`\mathit{politician}(x)`, :math:`\mathit{crazy(x)}`, :math:`\mathit{knows}(x, y)`, :math:`\mathit{related\mathord{\mbox{-}}to}(x, y)`, and :math:`\mathit{rich}(x)`, write down first-order sentences asserting the following:
 
    a. Nobody trusts a politician.
 

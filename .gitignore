@@ -1,5 +1,9 @@
-_static/
-_build/
-latex_images/*.png
-*.pyc
-.venv
+*.olean
+.venv/
+.vscode/
+/__pycache__
+/_build
+/_static
+/_target
+/leanpkg.path
+/latex_images
